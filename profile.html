@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Times New Roman", Times, serif;
+      background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+      color: #1a1a1a;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+
+    .masthead {
+      background: linear-gradient(to bottom, #fff 0%, #f8f8f8 100%);
+      border-bottom: 4px double #000;
+      padding: 1.5rem 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .masthead-title {
+      font-family: "Times New Roman", serif;
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+      margin: 0;
+      text-transform: uppercase;
+      color: #000;
+      text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+    }
+
+    .masthead-subtitle {
+      font-size: 0.85rem;
+      font-style: italic;
+      margin: 0.5rem 0 0;
+      color: #666;
+      letter-spacing: 1px;
+    }
+
+    .header-bar {
+      background: #000;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header-bar .date {
+      font-style: italic;
+    }
+
+    .logout-btn {
+      background: #fff;
+      color: #000;
+      border: 2px solid #fff;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      font-family: "Times New Roman", serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .logout-btn:hover {
+      background: #000;
+      color: #fff;
+      border-color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(255,255,255,0.2);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .lead-story {
+      background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+      border: 3px double #000;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .lead-story:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    .headline {
+      font-size: 2.5rem;
+      font-weight: bold;
+      line-height: 1.2;
+      margin: 0 0 0.5rem 0;
+      text-transform: uppercase;
+      border-bottom: 3px solid #000;
+      padding-bottom: 0.75rem;
+      letter-spacing: 2px;
+    }
+
+    .subheadline {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin: 0 0 2rem 0;
+      color: #444;
+    }
+
+    .user-profile-container {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .avatar-section {
+      text-align: center;
+    }
+
+    .avatar {
+      width: 200px;
+      height: 200px;
+      border: 5px solid #000;
+      object-fit: cover;
+      filter: grayscale(100%);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .avatar:hover {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    .avatar-placeholder {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #000 0%, #333 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: #fff;
+      border: 5px solid #000;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .photo-caption {
+      font-size: 0.75rem;
+      font-style: italic;
+      margin-top: 0.75rem;
+      text-align: center;
+      color: #666;
+    }
+
+    .user-info-section {
+      padding-left: 1.5rem;
+      border-left: 2px solid #ddd;
+    }
+
+    .byline {
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      color: #000;
+      background: #f0f0f0;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+    }
+
+    .name-display {
+      margin-bottom: 1.5rem;
+    }
+
+    .name-row {
+      margin-bottom: 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .name-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.25rem;
+      color: #666;
+    }
+
+    .name-value {
+      font-size: 1.8rem;
+      font-weight: bold;
+      display: block;
+      line-height: 1.3;
+    }
+
+    .arabic-text {
+      direction: rtl;
+      text-align: right;
+      font-family: "Traditional Arabic", "Arabic Typesetting", "Times New Roman", serif;
+    }
+
+    .login-name {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+      color: #444;
+      background: #f8f8f8;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      border-left: 3px solid #000;
+    }
+
+    .cohort-box {
+      background: linear-gradient(135deg, #000 0%, #333 100%);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border: 3px double #000;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .cohort-box:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #ddd;
+    }
+
+    .info-item {
+      padding: 0.75rem;
+      background: #f8f8f8;
+      border-left: 4px solid #000;
+      transition: all 0.3s ease;
+    }
+
+    .info-item:hover {
+      background: #f0f0f0;
+      transform: translateX(5px);
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+      color: #666;
+    }
+
+    .info-value {
+      font-size: 1rem;
+      color: #000;
+      font-weight: 500;
+    }
+
+    .article {
+      background: #fff;
+      border: 2px solid #000;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .article:hover {
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+    }
+
+    .article-headline {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 0 0 1rem 0;
+      text-transform: uppercase;
+      border-bottom: 3px solid #000;
+      padding-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .article-content {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .article-content p {
+      margin: 0.75rem 0;
+    }
+
+    .stats-box {
+      border: 2px solid #000;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-radius: 4px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    svg {
+      width: 100%;
+      height: 300px;
+      border: 2px solid #000;
+      background: #fff;
+      margin: 1rem 0;
+      display: block;
+      border-radius: 2px;
+    }
+
+    #xpGraph {
+      height: 350px;
+    }
+    
+    #progressGraph {
+      height: 350px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-card {
+      background: linear-gradient(to bottom, #fff 0%, #fafafa 100%);
+      border: 2px solid #000;
+      padding: 1.25rem;
+      text-align: center;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-color: #333;
+    }
+
+    .skill-card svg {
+      width: 100%;
+      height: 180px;
+      border: none;
+      background: transparent;
+      margin: 0.5rem 0;
+    }
+
+    .skill-name {
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      color: #000;
+      padding: 0.5rem;
+      background: #f0f0f0;
+      border-bottom: 2px solid #000;
+    }
+
+    .loading {
+      text-align: center;
+      font-style: italic;
+      padding: 3rem;
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .ornamental-border {
+      border-top: 2px solid #000;
+      border-bottom: 2px solid #000;
+      padding: 1rem 0;
+      text-align: center;
+      margin: 2.5rem 0;
+      font-size: 1.5rem;
+      background: linear-gradient(to right, transparent 0%, #f0f0f0 50%, transparent 100%);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .loading {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+      .logout-btn, .header-bar {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .user-profile-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .user-info-section {
+        border-left: none;
+        padding-left: 0;
+        border-top: 2px solid #ddd;
+        padding-top: 1.5rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .masthead-title {
+        font-size: 1.8rem;
+      }
+
+      .headline {
+        font-size: 1.8rem;
+      }
+
+      .article-headline {
+        font-size: 1.4rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .lead-story, .article {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="masthead">
+    <h1 class="masthead-title">The Developer's Chronicle</h1>
+    <p class="masthead-subtitle">All the Code That's Fit to Print</p>
+  </div>
+
+  <div class="header-bar">
+    <span class="date" id="currentDate"></span>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+
+  <div class="container">
+    <div class="lead-story" id="userHeaderCard">
+      <div class="loading">Loading profile...</div>
+    </div>
+
+    <div class="ornamental-border">❖ ❖ ❖</div>
+
+    <div class="article" id="basicInfoArticle">
+      <h2 class="article-headline">System Information</h2>
+      <div class="article-content" id="basicInfo">
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <div class="article" id="xpArticle">
+      <h2 class="article-headline">Experience Points</h2>
+      <div class="article-content" id="xpInfo">
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <div class="article" id="statsArticle">
+      <h2 class="article-headline">Statistical Analysis</h2>
+      <div class="article-content">
+        <div class="stats-box">
+          <svg id="xpGraph"></svg>
+        </div>
+        <div class="stats-box">
+          <svg id="progressGraph"></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="article" id="skillsArticle">
+      <h2 class="article-headline">Technical Proficiencies</h2>
+      <div class="article-content">
+        <p>The following represents the student's demonstrated competencies across various technical domains, measured through project completion and peer evaluation.</p>
+        <div id="skillsContainer" class="skills-grid">
+          <p>Loading skills data...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', dateOptions);
+  </script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
