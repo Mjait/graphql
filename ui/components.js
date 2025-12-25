@@ -14,9 +14,7 @@ export function renderUserHeader(userDetails) {
   const placeOfBirth = user.placeOfBirth || '';
   const arabicPlaceOfBirth = user.arabicPlaceOfBirth || '';
   
-  const cohortLabel = user.labels?.find(label => 
-    label.labelName && label.labelName.includes('C4')
-  );
+  const cohortLabel = user.labels?.at(0);
   const cohortName = cohortLabel?.labelName || 'No cohort assigned';
   
   const initials = (firstName[0] || '') + (lastName[0] || '');

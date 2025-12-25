@@ -22,10 +22,15 @@ export function CreateGraphQLClient(token) {
     const data = await response.json();
     console.log('GraphQL response:', data);
 
-    if (!response.ok || data.errors) {
-      throw new Error(
-        data.errors?.[0]?.message || 'GraphQL query failed'
-      );
+    if (data?.errors) {
+      if (data?.errors[0]?.extensions?.code === "invalid-jwt") {
+        localStorage.removeItem('jwt');
+        window.location.href = './index.html';
+      } else {
+        console.error("GraphQL errors:", data.errors);
+        window.location.reload();
+      }
+      return null;
     }
 
     return data.data;
