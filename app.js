@@ -31,7 +31,7 @@ async function loadProfile() {
 
       const userDetails = await client.query(Queries.userDetails, { userId: Number(user.id) });
       console.log('User details:', userDetails);
-      
+
       if (userDetails) {
         renderUserHeader(userDetails);
       }
@@ -39,7 +39,7 @@ async function loadProfile() {
       const skills = await client.query(Queries.skills, { userId: Number(user.id) });
       console.log('Skills:', skills);
 
-      if (skills && skills.user && skills.user.transactions && skills.user.transactions.len() > 0) {
+      if (skills && skills.user.transactions && skills.user.transactions.length > 0) {
         drawSkillsGauges(skills.user.transactions);
       }
 
@@ -51,11 +51,11 @@ async function loadProfile() {
 
       const xpProgress = await client.query(Queries.xpProgress);
       console.log('XP Progress:', xpProgress);
-      
+
       if (level && level.level && level.level[0]) {
         const currentLevel = level.level[0].amount;
         const rank = getUserRank(currentLevel);
-        
+
         const auditData = auditRatio?.user || null;
         renderXPInfo(currentLevel, rank);
       }
@@ -67,7 +67,7 @@ async function loadProfile() {
         drawAuditDonutChart(totalUp, totalDown, ratio);
       }
 
-      if (xpProgress && xpProgress.transaction && xpProgress.transaction.len() > 0 ) {
+      if (xpProgress && xpProgress.transaction && xpProgress.transaction.length > 0) {
         drawXPChart(xpProgress.transaction);
       }
     }
