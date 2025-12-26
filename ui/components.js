@@ -98,7 +98,7 @@ export function renderBasicInfo(user) {
 }
 
 
-export function renderXPInfo(level, rank, auditData) {
+export function renderXPInfo(level, rank) {
   const xpInfoDiv = document.getElementById('xpInfo');
   
   let html = `
