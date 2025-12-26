@@ -14,6 +14,7 @@ logoutBtn.addEventListener('click', () => {
 
 const jwt = localStorage.getItem('jwt');
 if (!jwt) {
+  localStorage.removeItem('jwt');
   window.location.href = './index.html';
 }
 
