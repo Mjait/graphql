@@ -303,6 +303,18 @@
       The Developer's Chronicle © 2024 • Error Code: 404 • Page Not Found
     </div>
   </div>
- <script type="module" src="404.js"></script>
+
+  <script>
+    const basePath = '/graphql'; 
+    const profileBtn = document.getElementById('profileBtn');
+    profileBtn.addEventListener('click', () => {
+      window.location.href = basePath + '/profile.html';
+    });
+    
+    const homepageBtn = document.getElementById('homepageBtn');
+    homepageBtn.addEventListener('click', () => {
+      window.location.href = basePath + '/index.html';
+    });
+  </script>
 </body>
 </html>
