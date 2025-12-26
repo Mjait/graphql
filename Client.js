@@ -3,7 +3,8 @@ export function CreateGraphQLClient(token) {
     'https://learn.zone01oujda.ma/api/graphql-engine/v1/graphql';
 
   if (!token || token.split('.').length !== 3) {
-    throw new Error('Invalid or missing JWT');
+    localStorage.removeItem('jwt');
+    window.location.href = './index.html';
   }
 
   async function query(query, variables = {}) {
